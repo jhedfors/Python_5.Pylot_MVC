@@ -17,6 +17,10 @@ from system.core.router import routes
     The automatically generated routes respond to all of the http verbs (GET, POST, PUT, PATCH, DELETE)
 """
 routes['default_controller'] = 'Users'
+routes['POST']['/register'] = 'Users#registration_form'
+routes['POST']['/login'] = 'Users#login_form'
+routes['/success'] = 'Users#success_view'
+
 """
     You can add routes and specify their handlers as follows:
 

@@ -11,58 +11,51 @@
     <div class="wrapper">
       <div class="row">
         <div class="col s6">
+          {% with errors = get_flashed_messages()[0] %}
+            {% if not errors%}
+              {% set errors = {'errors': 'none'} %}
+            {% endif %}
           <form action="/register" method="post">
             <p><label for="fname">First Name:</label><span class="error">
-              {% with errors = get_flashed_messages(category_filter=["fname_error"]) %}
-                {% if errors %}
-                  {% for error in errors%}
-                    {{error}}
-                  {% endfor%}
-                {% endif %}
-              {% endwith %}
+                    {{errors['fname_error']}}
             </span><input type="text" name="fname"></p>
             <p><label for="lname">Last Name:</label><span class="error">
-              {% with errors = get_flashed_messages(category_filter=["lname_error"]) %}
-                {% if errors %}
-                  {% for error in errors%}
-                    {{error}}
-                  {% endfor%}
-                {% endif %}
-              {% endwith %}
+                  {{errors['lname_error']}}
               </span><input type="text" name="lname"></p>
             <p><label for="email">Email:</label>
               <span class="error">
-                {% with errors = get_flashed_messages(category_filter=["email_error"]) %}
-                  {% if errors %}
-                    {% for error in errors%}
-                      {{error}}
-                    {% endfor%}
-                  {% endif %}
-                {% endwith %}
+                    {{errors['email_error']}}
                 </span>
               <input type="text" name="email"></p>
             <p><label for="password">Password:</label><span class="error">
-              {% with errors = get_flashed_messages(category_filter=["password_error"]) %}
-                {% if errors %}
-                  {% for error in errors%}
-                    {{error}}
-                  {% endfor%}
-                {% endif %}
-              {% endwith %}
+                  {{errors['password_error']}}
             </span><input type="password" name="password"></p>
             <p><label for="password_conf">Confirm Password:</label><span class="error">
-              {% with errors = get_flashed_messages(category_filter=["password_conf_error"]) %}
-                {% if errors %}
-                  {% for error in errors%}
-                    {{error}}
-                  {% endfor%}
-                {% endif %}
-              {% endwith %}
+                  {{errors['password_conf_error']}}
             </span><input type="password" name="password_conf"></p>
-            <p><input class='btn' type="submit" value="Submit "></p>
+            <p><input class='btn' type="submit" value="Register "></p>
           </form>
-
+              {% endwith %}
         </div>
+        <div class="col s6">
+          {% with errors = get_flashed_messages()[0] %}
+            {% if not errors%}
+              {% set errors = {'errors': 'none'} %}
+            {% endif %}
+          <form action="/login" method="post">
+            <p><label for="email">Email:</label>
+              <span class="error">
+                    {{errors['login_email_error']}}
+                </span>
+              <input type="text" name="email"></p>
+            <p><label for="password">Password:</label><span class="error">
+                  {{errors['login_password_error']}}
+            </span><input type="password" name="password"></p>
+            <p><input class='btn' type="submit" value="Login "></p>
+          </form>
+              {% endwith %}
+        </div>
+
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
