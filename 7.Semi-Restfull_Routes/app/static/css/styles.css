@@ -1,0 +1,32 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+div.main{
+  margin: 20px;
+
+}
+
+label{
+  display: inline-block;
+  width: 100px;
+}
+
+th, td{
+  border: 1px solid black;
+  padding: 7px;
+}
+table{
+  margin: 10px 0px;
+}
+input[type='text']{
+  border: 1px solid black;
+  margin: 3px 0px;
+}
+input[type='submit']{
+  margin: 3px 0px;
+}
+form.edit, form.new, div.product{
+  margin: 10px 0px
+};
