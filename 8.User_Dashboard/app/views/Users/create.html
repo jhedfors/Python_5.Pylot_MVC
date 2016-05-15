@@ -14,9 +14,7 @@
         <div class="col s4">
           <br><br>
           <h4 class="header orange-text left-align">Add a new user</h4>
-          <?php echo form_open('register_user');
-            echo validation_errors();
-          ?>
+          <!--registration errors  -->
             <form action="register_user" method="post">
     					<label class="left-align"for="email">Email Address:</label>
     					<input type="email" name="email" value="">

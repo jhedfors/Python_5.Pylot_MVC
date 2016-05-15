@@ -14,6 +14,8 @@ class Users(Controller):
         return self.load_view('Users/register.html')
     def dashboard_view(self):
         return self.load_view('Users/dashboard.html')
+    def dashboard_view_admin(self):
+        return self.load_view('Users/dashboard.html')
     def create_view(self):
         return self.load_view('Users/create.html')
     def show_view(self, id = None):
@@ -22,3 +24,5 @@ class Users(Controller):
         return self.load_view('Users/edit.html')
     def edit_view_admin(self, id):
         return self.load_view('Users/edit.html')
+    def logoff(self):
+        return redirect('/')

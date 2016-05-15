@@ -20,10 +20,12 @@ routes['default_controller'] = 'Users'
 routes['/signin'] = 'Users#signin_view'
 routes['/register'] = 'Users#register_view'
 routes['/dashboard'] = 'Users#dashboard_view'
+routes['/dashboard/admin'] = 'Users#dashboard_view_admin'
 routes['/users/new'] = 'Users#create_view'
 routes['/users/show/<id>'] = 'Users#show_view'
 routes['/users/edit/'] = 'Users#edit_view'
 routes['/users/edit/<id>'] = 'Users#edit_view_admin'
+routes['/logoff'] = 'Users#logoff'
 
 """
     You can add routes and specify their handlers as follows:

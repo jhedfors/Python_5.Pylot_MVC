@@ -19,14 +19,14 @@
          <div class="row">
            <div class="cols 6 left">
              <h4 class="header orange-text left-align">
-            // display  'Manage Users' or 'All Users' as applicable
+            <!-- // display  'Manage Users' or 'All Users' as applicable -->
 
            </h4>
            </div>
            <div class="cols 6 right">
-            //if userlevel is admin
+            <!-- //if userlevel is admin -->
                <a class="btn waves-effect waves-light orange " href="/users/new">Add new</a>
-            //endif
+            <!-- //endif -->
            </div>
          </div>
          <div class="">
@@ -38,25 +38,25 @@
                  <th>email</th>
                  <th>created_at</th>
                  <th>user_level</th>
-                 //if userlevel is admin
+                 <!-- //if userlevel is admin -->
                  <th>actions</th>
-                 //endif
+                 <!-- //endif -->
                </tr>
              </thead>
              <tbody>
-                //for each user as users
+                <!-- //for each user as users -->
                        <tr>
                          <td>user['id']</td>
                          <td><a href="/users/show/<?php echo $user['id'] ?>">user['first_name'];user['last_name']</a></td>
                          <td>['email']</td>
                          <td>user['created_on']</td>
                          <td>user['user_level']</td>
-                         //if user is admin
+                         <!-- //if user is admin -->
                          <td><a href="/users/edit/<?php echo $user['id'] ?>">edit</a> <a href="/Dashboard/delete_user/<?php echo $user['id'] ?>">remove</a></td>
-                         //endif
+                         <!-- //endif -->
                        </tr>
 
-                  //end foreach
+                  <!-- //end foreach -->
              </tbody>
            </table>
          </div>
