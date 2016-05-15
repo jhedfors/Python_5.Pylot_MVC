@@ -12,8 +12,12 @@ class Users(Controller):
         return self.load_view('Users/signin.html')
     def register_view(self):
         return self.load_view('Users/register.html')
+    def register_form(self):
+        info = self.models['User'].add(request.form)
+        return redirect('/dashboard')
     def dashboard_view(self):
-        return self.load_view('Users/dashboard.html')
+        info = self.models['User'].index()
+        return self.load_view('Users/dashboard.html', users = info)
     def dashboard_view_admin(self):
         return self.load_view('Users/dashboard.html')
     def create_view(self):
@@ -21,8 +25,11 @@ class Users(Controller):
     def show_view(self, id = None):
         return self.load_view('Users/show.html')
     def edit_view(self):
+        info = self.models['user'].show()
         return self.load_view('Users/edit.html')
     def edit_view_admin(self, id):
-        return self.load_view('Users/edit.html')
+        info = self.models['User'].show(id)[0]
+        print info
+        return self.load_view('Users/edit.html', profile = info)
     def logoff(self):
         return redirect('/')

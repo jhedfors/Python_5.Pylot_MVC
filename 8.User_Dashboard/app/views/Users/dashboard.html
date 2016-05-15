@@ -10,12 +10,8 @@
   <body>
     {% include 'Users/partials/_header.html' %}
      <div class="section no-pad-bot" id="index-banner">
-     <div class="row">
-       <div class="col s1">
-         <p>
-         </p>
-       </div>
-       <div class="col s8 container">
+     <div class="row container">
+       <div class="col s12">
          <div class="row">
            <div class="cols 6 left">
              <h4 class="header orange-text left-align">
@@ -29,38 +25,39 @@
             <!-- //endif -->
            </div>
          </div>
-         <div class="">
-           <table class="striped">
-             <thead>
-               <tr>
-                 <th>id</th>
-                 <th>Name</th>
-                 <th>email</th>
-                 <th>created_at</th>
-                 <th>user_level</th>
-                 <!-- //if userlevel is admin -->
-                 <th>actions</th>
-                 <!-- //endif -->
-               </tr>
-             </thead>
-             <tbody>
-                <!-- //for each user as users -->
-                       <tr>
-                         <td>user['id']</td>
-                         <td><a href="/users/show/<?php echo $user['id'] ?>">user['first_name'];user['last_name']</a></td>
-                         <td>['email']</td>
-                         <td>user['created_on']</td>
-                         <td>user['user_level']</td>
-                         <!-- //if user is admin -->
-                         <td><a href="/users/edit/<?php echo $user['id'] ?>">edit</a> <a href="/Dashboard/delete_user/<?php echo $user['id'] ?>">remove</a></td>
-                         <!-- //endif -->
-                       </tr>
+         <div class="row">
+           <div class="col s12">
+             <table class="striped">
+               <thead>
+                 <tr>
+                   <th>id</th>
+                   <th>Name</th>
+                   <th>email</th>
+                   <th>created_at</th>
+                   <th>user_level</th>
+                   <!-- //if userlevel is admin -->
+                   <th>actions</th>
+                   <!-- //endif -->
+                 </tr>
+               </thead>
+               <tbody>
+                 {% for user in users%}
+                 <tr>
+                   <td>{{user['user_id']}}</td>
+                   <td><a href="/users/show/<?php echo $user['id'] ?>">{{user['name']}}</a></td>
+                   <td>{{user['email']}}</td>
+                   <td>{{user['created_on']}}</td>
+                   <td>{{user['user_level']}}</td>
+                   <!-- //if user is admin -->
+                   <td><a href="/users/edit/{{user['user_id']}}">edit</a> <a href="/Dashboard/delete_user/{{user['user_id']}}">remove</a></td>
+                   <!-- //endif -->
+                 </tr>
+                 {%endfor%}
+               </tbody>
+             </table>
 
-                  <!-- //end foreach -->
-             </tbody>
-           </table>
+           </div>
          </div>
-     </div>
      </div>
    </div>
 

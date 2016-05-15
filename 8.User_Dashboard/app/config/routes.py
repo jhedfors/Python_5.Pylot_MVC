@@ -19,6 +19,7 @@ from system.core.router import routes
 routes['default_controller'] = 'Users'
 routes['/signin'] = 'Users#signin_view'
 routes['/register'] = 'Users#register_view'
+routes['POST']['/register_form'] = 'Users#register_form'
 routes['/dashboard'] = 'Users#dashboard_view'
 routes['/dashboard/admin'] = 'Users#dashboard_view_admin'
 routes['/users/new'] = 'Users#create_view'

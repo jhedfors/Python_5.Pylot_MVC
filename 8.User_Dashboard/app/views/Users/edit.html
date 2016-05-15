@@ -37,21 +37,17 @@
               <p>Edit Information</p>
               <form action="/users/edit_information" method="post">
       					<label class="left-align"for="email">Email Address:</label>
-      					<input type="email" name="email" value="<?php echo $profile['email'] ?>">
+      					<input type="email" name="email" value="{{profile['email']}}">
                 <label class="left-align"for="first_name">First Name:</label>
-                <input type="text" name="first_name" value="<?php echo $profile['first_name'] ?>">
+                <input type="text" name="first_name" value="{{profile['first_name']}}">
                 <label class="left-align"for="last_name">Last Name:</label>
-                <input type="text" name="last_name" value="<?php echo $profile['last_name'] ?>">
+                <input type="text" name="last_name" value="{{profile['last_name']}}">
                 <label class="left-align" for="user_level">User Level</label>
                 <div class="input-field">
-                  <select  name="user_level">
+                  <select name="user_level">
                     <!-- //pre-select the current user level -->
-                    <option
-                    <!-- if profile['user_level'] == 'normal' display "selected" -->
-                    value = "normal">Normal</option>
-                    <option
-                    //if  profile['user_level'] == 'admin' display "selected"
-                    value = "admin">Admin</option>
+                    <option value = "normal">Normal</option>
+                    <option value = "admin">Admin</option>
                   </select>
                 </div>
 
@@ -74,15 +70,12 @@
             <p>Edit Description</p>
             <form class="" action="/users/edit_description" method="post">
               <label for="description"></label>
-              <textarea name="description">profile['description'] </textarea>
+              <textarea name="description">{{profile['description']}} </textarea>
     					<input class="btn waves-effect waves-light orange" type="submit" value="save">
             </form>
           </div>
         </div>
 
-      </div>
-      <div class="col s1">
-        <p></p>
       </div>
     </div>
 
@@ -90,6 +83,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
 
   </body>
 </html>
