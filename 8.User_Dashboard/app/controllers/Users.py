@@ -11,25 +11,59 @@ class Users(Controller):
     def signin_view(self):
         return self.load_view('Users/signin.html')
     def register_view(self):
-        return self.load_view('Users/register.html')
+        return self.load_view('Users/create.html')
     def register_form(self):
         info = self.models['User'].add(request.form)
-        return redirect('/dashboard')
+        # print info
+        if 'errors' in info:
+            flash(info['errors'])
+            return redirect('/register')
+        else:
+            session['active_id'] = info['active_id']
+            session['user_level'] = 'normal'
+            return redirect('/dashboard')
+    def signin_form(self):
+        info = self.models['User'].signin(request.form)
+        if 'errors' in info:
+            flash(info['errors'])
+            return redirect('/signin')
+        else:
+            session['active_id'] = info['active_id']
+            session['user_level'] = info['user_level']
+            if session['user_level'] == 'admin':
+                return redirect('/dashboard/admin')
+            return redirect('/dashboard')
     def dashboard_view(self):
         info = self.models['User'].index()
         return self.load_view('Users/dashboard.html', users = info)
     def dashboard_view_admin(self):
-        return self.load_view('Users/dashboard.html')
+        info = self.models['User'].index()
+        return self.load_view('Users/dashboard.html', users = info)
     def create_view(self):
         return self.load_view('Users/create.html')
-    def show_view(self, id = None):
-        return self.load_view('Users/show.html')
-    def edit_view(self):
-        info = self.models['user'].show()
-        return self.load_view('Users/edit.html')
-    def edit_view_admin(self, id):
+    def show_view(self,id):
         info = self.models['User'].show(id)[0]
         print info
+        return self.load_view('Users/show.html', profile = info)
+    def edit_view(self):
+        active_id = session['active_id']
+        info = self.models['User'].show(active_id)[0]
+        return self.load_view('Users/profile.html', profile = info)
+    def edit_view_admin(self, id):
+        info = self.models['User'].show(id)[0]
         return self.load_view('Users/edit.html', profile = info)
+    def edit_form(self):
+        info = self.models['User'].update(request.form)
+        return redirect('/dashboard')
+    def edit_description_form(self):
+        info = self.models['User'].update_description(request.form)
+        return redirect('/dashboard')
+    def edit_password_form(self):
+        info = self.models['User'].update_password(request.form)
+        return redirect('/dashboard')
+    def delete_user(self,id):
+        self.models['User'].delete(id)
+        return redirect('/dashboard')
     def logoff(self):
+        session.clear()
         return redirect('/')

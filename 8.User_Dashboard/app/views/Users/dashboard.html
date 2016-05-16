@@ -15,14 +15,14 @@
          <div class="row">
            <div class="cols 6 left">
              <h4 class="header orange-text left-align">
-            <!-- // display  'Manage Users' or 'All Users' as applicable -->
+               {{ 'Manage Users' if session['user_level'] == 'admin' else 'All Users'}}
 
            </h4>
            </div>
            <div class="cols 6 right">
-            <!-- //if userlevel is admin -->
+            {% if session['user_level']=='admin'%}
                <a class="btn waves-effect waves-light orange " href="/users/new">Add new</a>
-            <!-- //endif -->
+            {% endif %}
            </div>
          </div>
          <div class="row">
@@ -35,24 +35,37 @@
                    <th>email</th>
                    <th>created_at</th>
                    <th>user_level</th>
-                   <!-- //if userlevel is admin -->
+                   {% if session['user_level']=='admin'%}
                    <th>actions</th>
-                   <!-- //endif -->
+                   {% endif %}
                  </tr>
                </thead>
                <tbody>
                  {% for user in users%}
                  <tr>
                    <td>{{user['user_id']}}</td>
-                   <td><a href="/users/show/<?php echo $user['id'] ?>">{{user['name']}}</a></td>
+                   <td><a href="/users/show/{{user['user_id']}}">{{user['name']}}</a></td>
                    <td>{{user['email']}}</td>
                    <td>{{user['created_on']}}</td>
                    <td>{{user['user_level']}}</td>
-                   <!-- //if user is admin -->
-                   <td><a href="/users/edit/{{user['user_id']}}">edit</a> <a href="/Dashboard/delete_user/{{user['user_id']}}">remove</a></td>
-                   <!-- //endif -->
+                   {% if session['user_level']=='admin'%}
+                   <td><a  href="/users/edit/{{user['user_id']}}{% set delete_id = user['user_id']%}">edit</a> <a class="modal-trigger" onclick="Modal_id({{ user['user_id']}})" href="#modal">remove</a>
+
+                   </td>
+                   {% endif %}
                  </tr>
                  {%endfor%}
+                 <div id='modal' class="modal" data="">
+                   <div class="modal-content">
+                     <h4>Delete user <span class="modal_id"></span>?</h4>
+                     <p>
+                       User #<span class="modal_id"></span> will be deleted permanently.
+                     </p>
+                   </div>
+                   <div class="modal-footer">
+                     <a id= "modal_delete" href="">Delete</a>
+                   </div>
+                 </div>
                </tbody>
              </table>
 
@@ -61,10 +74,18 @@
      </div>
    </div>
 
-
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+
+    <script type="text/javascript">
+      function Modal_id(id){
+        $("#modal_delete").attr("href","delete_user/"+id)
+        $(".modal_id").text(id)
+
+      }
+    </script>
 
   </body>
 </html>

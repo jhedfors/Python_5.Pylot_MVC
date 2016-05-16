@@ -18,15 +18,15 @@
           <br><br>
 
           <h4 class="header orange-text left-align">
-            //profile['first_name'] profile['last_name'];
+            {{profile['first_name']}} {{profile['last_name']}}
           </h4>
           <div class="row">
             <div class="col s12">
-              <p><label class="info" >Registered at:</label>profile['created_on']</p>
-              <p><label class="info" >User ID:</label>profile['id']</p>
-              <p><label class="info" >Email address:</label> profile['email'] </p>
-              <p><label class="info" >Description:</label> profile['description'] </p>
-              <b>Leave a message for  profile['first_name'] </b>
+              <p><label class="info" >Registered at:</label>{{profile['created_on']}}</p>
+              <p><label class="info" >User ID:</label>{{profile['user_id']}}</p>
+              <p><label class="info" >Email address:</label> {{profile['email']}} </p>
+              <p><label class="info" >Description:</label> {{profile['description']}} </p>
+              <b>Leave a message for  {{profile['first_name']}} </b>
               <form class="" action="index.html" method="post">
                 <label for="new_message"></label>
                 <textarea name="new_message"></textarea>

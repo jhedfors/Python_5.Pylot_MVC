@@ -3,12 +3,14 @@
       <div class="row">
         <ul class="nav-mobile left">
           <li class=""><h4>Test App</h4></li>
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/users/show/<id>">Profile</a></li>
+
+          <li><a href="/dashboard{{ '/admin' if session['user_level']== 'admin'}}">Dashboard</a></li>
+          <li><a href="/users/edit/">Profile</a></li>
 
         </ul>
         <ul class="nav-mobile right">
-          <li><a href="/logoff">Log off</a></li>
+            <li>{{ session['active_id']}}({{ session['user_level']}})</li>
+            <li><a href="/logoff">Log off</a></li>
         </ul>
       </div>
   </div>
