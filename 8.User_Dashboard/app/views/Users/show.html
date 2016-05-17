@@ -17,7 +17,7 @@
           </h4>
           <div class="row">
             <div class="col s12">
-              <p><label class="info" >Registered at:</label>{{profile['created_on'] | myDate }}</p>
+              <p><label class="info" >Registered at:</label>{{profile['created_on'] | customDate }}</p>
               <p><label class="info" >User ID:</label>{{profile['user_id']}}</p>
               <p><label class="info" >Email address:</label> {{profile['email']}} </p>
               <p><label class="info" >Description:</label> {{profile['description']}} </p>
@@ -35,7 +35,7 @@
           <div class="section">
             <div class="row">
               <div class="col s6"><a href="{{message['author_id']}}">{{message['first_name']}} {{message['last_name']}}</a> wrote</div>
-              <div class="col s6 right-align">{{message['created_on']}}</div>
+              <div class="col s6 right-align">{{message['created_on'] | customDate }}</div>
             </div>
             <div class="row">
               <div class="col s12 light-blue lighten-5">
@@ -43,11 +43,10 @@
               </div>
             </div>
             {% for comment in message['comments']%}
-            <!-- {{comment}} -->
             <div class="section container">
               <div class="row">
                 <div class="col s6"><a href="{{comment['author_id']}}">{{comment['first_name']}} {{comment['last_name']}}</a> wrote</div>
-                <div class="col s6 right-align">{{comment['created_on'] | myDate }}</div>
+                <div class="col s6 right-align">{{comment['created_on'] | customDate }}</div>
               </div>
               <div class="row">
                 <div class="col s12 light-blue lighten-5">
