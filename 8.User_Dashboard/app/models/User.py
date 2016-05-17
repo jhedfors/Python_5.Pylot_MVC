@@ -29,7 +29,7 @@ class User(Model):
                 errors['password'] = u'Invalid Email or Password!'
                 return {'errors': errors}
 
-    def add(self,post):
+    def add(self,post,user_level):
         errors = {}
         if len(post['first_name'])< 2:
             errors['first_name'] = u'First Name cannot be empty!'
@@ -54,9 +54,8 @@ class User(Model):
         if len(errors) > 0:
             return {'errors': errors}
         pw_hash = self.bcrypt.generate_password_hash(post['password'])
-        # pw_hash = post['password']
         query = "INSERT INTO users (first_name, last_name, description, email, password, user_level, created_on, modified_on) VALUES (:first_name, :last_name,:description, :email, :password, :user_level, NOW(), NOW())"
-        values = {'first_name' : post['first_name'], 'last_name': post['last_name'],'description': '', 'email': post['email'], 'password': pw_hash, 'user_level':'normal'}
+        values = {'first_name' : post['first_name'], 'last_name': post['last_name'],'description': '', 'email': post['email'], 'password': pw_hash, 'user_level': user_level}
         active_id = self.db.query_db(query,values)
         return {'active_id': active_id}
     def index(self):
@@ -65,6 +64,10 @@ class User(Model):
     def show(self,id):
         query = "SELECT users.id as user_id, first_name, last_name, email, description, user_level, created_on FROM users WHERE id = :id"
         values = {'id': id}
+        return self.db.query_db(query,values)
+    def show_admin_count(self):
+        query = "SELECT COUNT(users.id) as count FROM users WHERE user_level = :user_level"
+        values = {'user_level': 'admin'}
         return self.db.query_db(query,values)
     def update(self, post):
         query = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, user_level = :user_level WHERE id = :user_id"

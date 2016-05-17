@@ -30,6 +30,8 @@ routes['/users/edit/<id>'] = 'Users#edit_view_admin'
 routes['POST']['/users/edit_form'] = 'Users#edit_form'
 routes['POST']['/users/edit_description_form'] = 'Users#edit_description_form'
 routes['POST']['/users/edit_password_form'] = 'Users#edit_password_form'
+routes['POST']['/message_form'] = 'Messages#message_form'
+routes['POST']['/comment_form'] = 'Messages#comment_form'
 routes['/delete_user/<id>'] = 'Users#delete_user'
 routes['/logoff'] = 'Users#logoff'
 

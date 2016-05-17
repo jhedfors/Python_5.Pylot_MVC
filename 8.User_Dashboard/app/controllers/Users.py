@@ -5,6 +5,7 @@ class Users(Controller):
         super(Users, self).__init__(action)
         self.load_model('User')
         self.load_model('Message')
+        self.load_model('Comment')
         self.db = self._app.db
     def index(self):
         return self.load_view('Users/welcome.html')
@@ -13,14 +14,19 @@ class Users(Controller):
     def register_view(self):
         return self.load_view('Users/create.html')
     def register_form(self):
-        info = self.models['User'].add(request.form)
-        # print info
+        admin_count = self.models['User'].show_admin_count()[0]['count']
+        user_level = 'normal'
+        if admin_count == 0:
+            user_level = 'admin'
+        info = self.models['User'].add(request.form, user_level)
         if 'errors' in info:
             flash(info['errors'])
             return redirect('/register')
+        elif 'active_id' in session:
+            return redirect('/dashboard')
         else:
             session['active_id'] = info['active_id']
-            session['user_level'] = 'normal'
+            session['user_level'] = user_level
             return redirect('/dashboard')
     def signin_form(self):
         info = self.models['User'].signin(request.form)
@@ -43,8 +49,8 @@ class Users(Controller):
         return self.load_view('Users/create.html')
     def show_view(self,id):
         info = self.models['User'].show(id)[0]
-        print info
-        return self.load_view('Users/show.html', profile = info)
+        messages = self.models['Message'].show(id)
+        return self.load_view('Users/show.html', profile = info, messages = messages)
     def edit_view(self):
         active_id = session['active_id']
         info = self.models['User'].show(active_id)[0]

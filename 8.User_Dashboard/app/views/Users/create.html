@@ -21,7 +21,6 @@
           <h4 class="header orange-text left-align">
             {{'Add a new user' if session['user_level']=='admin' else 'Register'}}
             </h4>
-          <!--registration errors  -->
             <form action="/register_form" method="post">
     					<label class="left-align"for="email">Email Address:</label>
     					<input type="email" name="email" value="">
@@ -35,26 +34,19 @@
               <input type="password" name="confirm_password" value="">
     					<input class="btn-large waves-effect waves-light orange" type="submit" value="{{'Create' if session['user_level']=='admin' else 'Register'}}">
             </form>
-
           </div>
           <div class="cols 4">
-
           </div>
           <div class="cols 6 center">
             {% if session['user_level'] == 'admin' %}
               <a class="btn waves-effect waves-light orange" href="/dashboard/admin">Return to Dashboard</a>
             {% endif %}
           </div>
-
       </div>
-
       </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
   </body>
 </html>

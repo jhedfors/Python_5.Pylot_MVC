@@ -9,120 +9,68 @@
   </head>
   <body>
     {% include 'Users/partials/_header.html' %}
-    <div class="section no-pad-bot" id="index-banner">
+    <div class="section container no-pad-bot" id="index-banner">
       <div class="row">
-        <div class="col s1">
-        <p></p>
-        </div>
         <div class="col s10">
-          <br><br>
-
           <h4 class="header orange-text left-align">
             {{profile['first_name']}} {{profile['last_name']}}
           </h4>
           <div class="row">
             <div class="col s12">
-              <p><label class="info" >Registered at:</label>{{profile['created_on']}}</p>
+              <p><label class="info" >Registered at:</label>{{profile['created_on'] | myDate }}</p>
               <p><label class="info" >User ID:</label>{{profile['user_id']}}</p>
               <p><label class="info" >Email address:</label> {{profile['email']}} </p>
               <p><label class="info" >Description:</label> {{profile['description']}} </p>
               <b>Leave a message for  {{profile['first_name']}} </b>
-              <form class="" action="index.html" method="post">
-                <label for="new_message"></label>
-                <textarea name="new_message"></textarea>
+              <form class="section" action="/message_form" method="post">
+                <label for="message"></label>
+                <textarea name="message"></textarea>
+                <input type="hidden" name="recip_id" value="{{ profile['user_id']}}">
+                <input type="hidden" name="author_id" value="{{ session['active_id']}}">
                 <input class="btn waves-effect waves-light orange right" type="submit" value="post">
               </form>
             </div>
-            <div class="row">
-              <div class="col s6"><a href="#">Mark Guillen</a> wrote</div>
-              <div class="col s6 right-align">7 hours ago</div>
-              <div class="row">
-                <div class="col s12 message">
-                    Hi Michael! I am having fun building Boom YEAH!
-                </div>
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s1">
-                <p>
-
-                </p>
-              </div>
-              <div class="col s11">
-                <div class="row">
-                  <div class="col s8"><a href="#">Diana Manlulu</a> wrote</div>
-                  <div class="col s4 right-align">23 minutes ago</div>
-                  <div class="row">
-                    <div class="col s12 message">
-                        Awesome!
-                    </div>
-                    <form class="" action="index.html" method="post">
-                      <label for="new_message"></label>
-                      <textarea name="new_message" placeholder="write a message"></textarea>
-                      <input class="btn waves-effect waves-light orange right" type="submit" value="post">
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s6"><a href="#">Mark Guillen</a> wrote</div>
-              <div class="col s6 right-align">January 5th 2013</div>
-              <div class="row">
-                <div class="col s12 message">
-                    Hi Michael! I am having fun building Boom YEAH!
-                </div>
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s1">
-                <p>
-
-                </p>
-              </div>
-              <div class="col s11">
-                <div class="row">
-                  <div class="col s8"><a href="#">Diana Manlulu</a> wrote</div>
-                  <div class="col s4 right-align">January 6th 2013</div>
-                  <div class="row">
-                    <div class="col s12 message">
-                        Awesome!
-                    </div>
-                    <form class="" action="index.html" method="post">
-                      <label for="new_message"></label>
-                      <textarea name="new_message" placeholder="write a message"></textarea>
-                      <input class="btn waves-effect waves-light orange right" type="submit" value="post">
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
-          <div class="row">
-            <div class="col s12">
-              <div class="row">
-
-
+          {% for message in messages%}
+          <div class="section">
+            <div class="row">
+              <div class="col s6"><a href="{{message['author_id']}}">{{message['first_name']}} {{message['last_name']}}</a> wrote</div>
+              <div class="col s6 right-align">{{message['created_on']}}</div>
+            </div>
+            <div class="row">
+              <div class="col s12 light-blue lighten-5">
+                {{message['message']}}
               </div>
             </div>
-
-
+            {% for comment in message['comments']%}
+            <!-- {{comment}} -->
+            <div class="section container">
+              <div class="row">
+                <div class="col s6"><a href="{{comment['author_id']}}">{{comment['first_name']}} {{comment['last_name']}}</a> wrote</div>
+                <div class="col s6 right-align">{{comment['created_on'] | myDate }}</div>
+              </div>
+              <div class="row">
+                <div class="col s12 light-blue lighten-5">
+                  {{comment['comment']}}
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+            <form class="section" action="/comment_form" method="post">
+              <label for="comment"></label>
+              <textarea name="comment" placeholder = 'Add comment'></textarea>
+              <input type="hidden" name="recip_id" value="{{ profile['user_id']}}">
+              <input type="hidden" name="message_id" value="{{ message['message_id']}}">
+              <input type="hidden" name="author_id" value="{{ session['active_id']}}">
+              <input class="btn waves-effect waves-light orange right" type="submit" value="comment">
+            </form>
           </div>
+          {%endfor%}
         </div>
-
-      </div>
-      <div class="col s1">
-        <p></p>
       </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
   </body>
 </html>

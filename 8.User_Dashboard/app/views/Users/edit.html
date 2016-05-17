@@ -21,10 +21,7 @@
               </h4>
             </div>
             <div class="cols 6 right">
-              <!-- // if info['user_level'] == 'admin') -->
                   <a class="btn waves-effect waves-light orange " href="/dashboard/admin">Return to Dashboard</a>
-              <!-- //endif -->
-
             </div>
           </div>
           <div class="row">
@@ -46,7 +43,6 @@
                 </div>
                 <input type="hidden" name="user_id" value="{{profile['user_id']}}">
       					<input class="btn waves-effect waves-light orange" type="submit" value="Save">
-
               </form>
             </div>
             <div class="col s5">
@@ -62,15 +58,11 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/init.js') }}"></script>
-
   </body>
 </html>

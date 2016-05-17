@@ -12,3 +12,6 @@ def initialize_libraries(app):
       if int(s.strftime('%d')) == 2:
           return s.strftime('%b %dnd %Y %-I:%M%p')
 # Example usage {{date_object | customDate}}
+  @app.template_filter('myDate')
+  def customDate(s):
+    return s.strftime('%b %d %Y %I:%M %p')
