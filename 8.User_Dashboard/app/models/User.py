@@ -1,7 +1,6 @@
 from system.core.model import Model
 from flask.ext.bcrypt import Bcrypt
 import re
-# bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 NAME_REGEX = re.compile(r'^[A-z]+$')
 PASSWORD_REGEX = re.compile(r'^(?=.*[A-Z])(?=.*\d)(.{8,})$')
