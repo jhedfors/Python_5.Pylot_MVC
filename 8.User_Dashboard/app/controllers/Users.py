@@ -5,7 +5,6 @@ class Users(Controller):
         super(Users, self).__init__(action)
         self.load_model('User')
         self.load_model('Message')
-        self.load_model('Comment')
         self.db = self._app.db
     def index(self):
         return self.load_view('Users/welcome.html')
