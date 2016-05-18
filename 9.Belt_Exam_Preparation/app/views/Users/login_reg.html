@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Travel Dashboard</title>
-
-  <!-- CSS  -->
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="/assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
@@ -23,7 +20,7 @@
          <label for="email">Email:</label><input type="email" name="email" value="">
          <label for="password">Password:</label><input type="password" name="password" value="">
          <label for="confirm_pw">Confirm PW:</label><input type="password" name="confirm_pw" value="">
-         <input type="submit" value="Register">
+         <input class='btn'type="submit" value="Register">
        </form>
 
      </div>
@@ -32,17 +29,14 @@
        <form class="" action="/login" method="post">
          <label for="email">Email:</label><input type="text" name="email" value="">
          <label for="password">Password:</label><input type="password" name="password" value="">
-         <input type="submit"value="Login">
+         <input class='btn' type="submit"value="Login">
        </form>
      </div>
 
    </div>
-
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="/assets/js/materialize.js"></script>
-  <script src="/assets/js/init.js"></script>
-
+   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+   <script src="{{ url_for('static', filename='js/init.js') }}"></script>
   </body>
 </html>

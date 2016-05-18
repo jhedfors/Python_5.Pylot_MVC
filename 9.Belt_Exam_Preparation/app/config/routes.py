@@ -8,6 +8,8 @@ routes['GET']['/users/<id>'] = 'Users#user_view'
 routes['GET']['/books'] = 'Books#books_view'
 routes['GET']['/logout'] = 'Users#logout'
 routes['GET']['/books/add'] = 'Books#add_book_view'
+routes['POST']['/add_book_form'] = 'Books#add_book_form'
+routes['POST']['/add_review_form'] = 'Books#add_review_form'
 routes['GET']['/books/<id>'] = 'Books#book_view'
 routes['GET']['/delete/<review_id>/<book_id>/<author_id>'] = 'Books#delete_review'
 
